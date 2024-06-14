@@ -167,8 +167,8 @@ class ProductMusic(QMainWindow):
         if mixer.music.get_busy():
             smoothcoeff = 0.75 # Коэфф. сглаживания изменения
             self.fps = int(self.pydub.frame_rate * 0.001) # Кол-во семплов каждую миллисекунду
-            start = (mixer.music.get_pos()+ self.lastSliderPos)*self.fps
-            end = (mixer.music.get_pos() + self.lastSliderPos + self.interval)*self.fps
+            start = ((mixer.music.get_pos() + self.lastSliderPos) - self.interval)*self.fps
+            end = ((mixer.music.get_pos() + self.lastSliderPos) + self.interval)*self.fps
 
             # Всякое бывает
             if (end > len(self.pydub) * self.fps):
@@ -192,8 +192,8 @@ class ProductMusic(QMainWindow):
             ]
 
             # Просчитываем максимальную амплитуду (т.е громкость)
-            self.MaxFreq = smoothcoeff * self.MaxFreq + (1 - smoothcoeff) * max(SampleSlice)
-            self.MaxFreq /= maximum / 2
+            self.MaxFreq = smoothcoeff*1.25 * self.MaxFreq + (1 - smoothcoeff*1.25) * max(SampleSlice)
+            self.MaxFreq /= maximum * 0.1
 
 
             for i in range(8):
