@@ -3,3 +3,5 @@ pyqt6-tools==6.4.2.3.3
 numpy==1.26.4
 pydub==0.25.1
 pygame==2.5.2
+ffmpeg==1.4
+ffprobe==0.5
